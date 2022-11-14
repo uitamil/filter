@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Homepage</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1" >
+		<link href="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.css" rel="stylesheet" >
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js" ></script>
+	
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
+			<script src="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.js"></script>
+		<style>
+		.row {
+  max-width:960px !important;
+}
+
+.video-gallery {
+  padding:40px 0;
+}
+
+.column {
+  margin-bottom:40px;
+}
+		</style>
+    </head>
+    <body>
+ <div class="row" style="padding-top:40px;">    
+   <div class="columns medium-12 small-centered">
+     <h4 class="float-left"><a href="#" style="color:#000;">Logo</a>  <!--<span data-title></span>--></h4>
+     <!-- <a href="#" class="float-right" style="margin-top:7px;">Go to Help Center</a> -->
+   </div>
+</div>
+<div id="videoGallery" class="video-gallery">
+ 
+  <!-- Video -->
+ 
+  
+  <!-- Search / Filter -->
+  <div class="row">    
+     <div class="columns medium-12">
+      <input id="search" class="search" type="text" placeholder="search">
+    </div>
+  </div>
+  
+  
+  <!-- Thumbnails -->
+  <div id="thumbnails" class="list row small-up-1 medium-up-2 large-up-3">
+    <div class="column">
+      <a href="?id=DUWTT75xt6w&title=Introduction+to+the+Referral+Maker+App">
+        <img src="https://thumbs.dreamstime.com/z/charleston-sc-dirt-road-forest-deep-south-moss-23533847.jpg" width="800">
+        <span class="name"><strong>Introduction to the Referral Maker App</strong></span><br />
+        <span>10:00</span><br />
+        <span class="category">Getting Started</span>
+      </a>
+    </div>    
+    <div class="column">
+      <a  target="_self" href="https://www.youtube.com/watch?v=InSgoaDOSw4">
+        <img src="https://thumbs.dreamstime.com/z/forest-path-4942848.jpg" width="800">
+        <span class="name"><strong>Referral Maker CRM Goals</strong></span><br />
+        <span>10:00</span><br />
+        <span class="category">My Business</span>
+      </a>
+    </div>
+    <div class="column">
+      <a href="?id=tylg0IfWEbU&title=Referral+Maker+CRM+Priority+Action+Center">
+        <img src="https://thumbs.dreamstime.com/z/charleston-sc-dirt-road-forest-deep-south-moss-23533847.jpg" width="800">
+        <span class="name"><strong>Referral Maker CRM Priority Action Center</strong></span><br />
+        <span>10:00</span><br />
+        <span class="category">Relationships</span>
+      </a>
+    </div>
+    <div class="column">
+      <a href="?id=xXsrZblTa-U&title=Referral+Maker+CRM+App+Pop-By+Area">
+        <img src="https://thumbs.dreamstime.com/z/forest-path-4942848.jpg" width="800">
+        <span class="name"><strong>Referral Maker CRM App Pop-By Area</strong></span><br />
+        <span>10:00</span><br />
+        <span class="category">Marketing</span>
+      </a>
+    </div>
+    <div class="column">
+      <a href="?id=vb933-JveIQ&title=Referral+Maker+CRM+To-Do+Section">
+        <img src="https://thumbs.dreamstime.com/z/charleston-sc-dirt-road-forest-deep-south-moss-23533847.jpg" width="800">
+        <span class="name"><strong>Referral Maker CRM To-Do Section</strong></span><br />
+        <span>10:00</span><br />
+        <span class="category">My Business</span>
+      </a>
+    </div>
+    <div class="column">
+      <a href="?id=w0_Jj83yGvs&title=Referral+Maker+CRM+Mobile+App+Calendar">
+        <img src="https://thumbs.dreamstime.com/z/forest-path-4942848.jpg" width="800">
+        <span class="name"><strong>Referral Maker CRM Mobile App Calendar</strong></span><br />
+        <span>10:00</span><br />
+        <span class="category">My Business</span>
+      </a>
+    </div>
+  </div><!-- End Row -->
+
+ 
+</div><!-- End search-results -->
+
+<script>
+$(function() {
+  
+  // Search
+  var options = {
+    valueNames: ['name', 'category' ]
+  };
+  var videoList = new List('videoGallery', options);
+  
+  $("#search").change(function() {
+    // smooth scroll to thumbnails
+    $('html, body').animate({
+        scrollTop: $("#thumbnails").offset().top-60
+    }, 1000);  
+  });
+  
+  // Filter
+  $('#filter').change(function () {
+    var selection = this.value;
+    if (selection) {
+      videoList.filter(function(item) {
+        return (item.values().category == selection);
+      });
+    } else {
+      videoList.filter();
+    }
+  });
+});
+
+
+  //Get URL query string
+  function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split("=");
+      if (pair[0] == variable) { return pair[1]; }
+    }
+    return (false);
+  }
+  // Get URL query string variables
+  var id = getQueryVariable("id");
+  var title = getQueryVariable("title");
+
+if(id) {
+   $("[data-video-container]").show(); 
+    $("[data-video]").attr("src", "https://www.youtube.com/embed/" + id);
+}
+
+if(title) {
+  var videoTitle = title.replace(/\+/g, " ");
+  $("[data-title]").html(videoTitle);
+}
+</script>
+    </body>
+</html>
